@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="table">
+  <caption>List of Insured</caption>
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name and Surname</th>
+      <th scope="col"> </th>
+      <th scope="col">Age</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for insured in insureds %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td colspan="2"><a href="{% url "insured_detail" insured_person.id %}"><span>{{ insured_person.first_name }} {{ insured_person.last_name }}</span></a></td>
+      <td><a>{{ insured_person.age }}</a></td>
+      <td><a>{{ insured_person.address }}</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

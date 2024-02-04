@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1> Name: {{ insured_person.first_name }} <span class="glyphicon glyphicon-erase"></span></h1>
+    <h1> Surname: {{ insured_person.last_name }} </h1></small>
+    <h3> Insurance: {{insured_person.insurance.insurance_name}} </h3>
+    
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        {% if user.is_admin %}Detail: {% if insurance.tags.all.0 %} {% for tag in insurance.tags.all %} <div class="btn btn-primary">{{tag.tag_title}} </div> {% endfor %} {% else %} <span style="color: red;">This insured person does not have valid insurance</span> {% endif %}<br><button name="edit">Edit Details</button><button name="delete">Delete Insured Person</button>{% endif %}
+    </form>
+{% endblock %}
