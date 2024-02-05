@@ -8,42 +8,27 @@ This application is a simple Django app.
 
 pip install django
 
-markdown
-Copy code
-
 2. Clone the repository:
 
 git clone https://github.com/Didinga/insurance-records.git
-
-css
-Copy code
 
 3. Navigate to the project folder:
 
 cd insurance-records
 
-markdown
-Copy code
-
 4. Apply database migrations:
 
 python manage.py migrate
-
-markdown
-Copy code
 
 5. Start the development server:
 
 python manage.py runserver
 
-csharp
-Copy code
-
 6. Open a web browser and go to http://localhost:8000/
 
 ## Usage
 
-After starting the server, you can browse the blog, add new posts, and comments.
+After starting the server, you can browse the app, add new posts, and comments.
 
 ## Contributing
 
