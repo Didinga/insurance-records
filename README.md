@@ -1,6 +1,6 @@
 # My Django Application
 
-This application is a simple blog written in Django.
+This application is a simple Django app.
 
 ## Installation
 
