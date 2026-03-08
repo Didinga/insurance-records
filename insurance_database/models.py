@@ -12,7 +12,7 @@ class Insurance(models.Model):
         verbose_name_plural="Insurances"
 		
 class InsuranceDetail(models.Model):
-    detail_title = models.CharField(max_length = 30, verbose_name="Insurance Detail")
+    detail_title = models.CharField(max_length=30, default='', verbose_name="Insurance Detail")
 
     def __str__(self):
         return self.detail_title
@@ -24,7 +24,7 @@ class InsuranceDetail(models.Model):
 class InsuredPerson(models.Model):
     first_name = models.CharField(max_length=200, verbose_name="First Name")
     last_name = models.CharField(max_length=180, verbose_name="Last Name")
-    age = models.CharField(max_length=180, default='', verbose_name="Age")
+    age = models.IntegerField(default=0, verbose_name="Age")
     address = models.CharField(max_length=180, default='', verbose_name="Address")
     insurance = models.ForeignKey(Insurance, on_delete=models.SET_NULL, null=True, verbose_name="Insurance Type")
     detail_insurance = models.ManyToManyField(InsuranceDetail)
