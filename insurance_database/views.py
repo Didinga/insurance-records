@@ -62,7 +62,7 @@ class CreateInsuredPerson(LoginRequiredMixin, generic.edit.CreateView):
             return redirect("insured_person_index")
         return render(request, self.template_name, {"form": form})
 
-class EditInsuredPerson(LoginRequiredMixin, generic.edit.CreateView):
+class EditInsuredPerson(LoginRequiredMixin, generic.edit.UpdateView):
     form_class = InsuredPersonForm
     template_name = "insurance_database/create_insured_person.html"
     
