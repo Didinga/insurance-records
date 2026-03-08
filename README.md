@@ -1,39 +1,53 @@
-# My Django Application
+# Insurance Records
 
-This application is a simple Django app.
+![Python](https://img.shields.io/badge/Python-3.8-blue)
+![Django](https://img.shields.io/badge/Django-4.x-green)
+
+A Django web application for managing insured persons and their insurance records. Supports user authentication with role-based access — only admins can add, edit, or delete records.
+
+## Features
+
+- List of all insured persons sorted by last name
+- Detail view for each insured person
+- Add, edit and delete insured persons (admin only)
+- User registration and login via email
+- Role-based permissions (admin vs regular user)
+- Multiple insurance types and details per person
+
+## Tech Stack
+
+- Python 3.8
+- Django
+- SQLite (development)
 
 ## Installation
 
-1. Install Python and Django using pip:
-
-pip install django
-
-2. Clone the repository:
-
+```bash
 git clone https://github.com/Didinga/insurance-records.git
-
-3. Navigate to the project folder:
-
 cd insurance-records
-
-4. Apply database migrations:
-
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 python manage.py migrate
-
-5. Start the development server:
-
+python manage.py createsuperuser
 python manage.py runserver
-
-6. Open a web browser and go to http://localhost:8000/
+```
 
 ## Usage
 
-After starting the server, you can browse the app, add new posts, and comments.
+Open your browser at `http://127.0.0.1:8000`
 
-## Contributing
+- Register a new account or log in
+- Browse the list of insured persons
+- Admins can add, edit and delete records
 
-If you would like to contribute to this project, please create a pull request and describe your changes.
+## Models
 
-## Contact
+- `Insurance` - insurance type (e.g. life, health, car)
+- `InsuranceDetail` - additional detail for an insurance
+- `InsuredPerson` - person with first name, last name, age, address, insurance type and details
+- `User` - custom user model using email instead of username
 
-For questions or feedback, you can contact the author at omodiding@gmail.com.
+## Author
+
+Didinga Omodi - [GitHub](https://github.com/Didinga) - [LinkedIn](https://www.linkedin.com/in/didiomodi/)
