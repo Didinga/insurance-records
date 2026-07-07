@@ -11,27 +11,33 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3_!s79db7b5qc5%(k&-8+ia+h)27$-oef_bze%@k%#9h1shfp5'
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-dev-only-change-me-in-production",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",") if os.environ.get("DJANGO_ALLOWED_HOSTS") else []
 
 
 # Application definition
 
 INSTALLED_APPS = [
 	'crispy_forms',
+	'crispy_bootstrap4',
 	'insurance_database',  # Updated app name
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
@@ -80,7 +87,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.environ.get('DJANGO_DB_PATH', os.path.join(BASE_DIR, 'db.sqlite3')),
     }
 }
 
