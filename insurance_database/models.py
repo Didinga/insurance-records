@@ -31,8 +31,9 @@ class InsuredPerson(models.Model):
 	
     def __str__(self):
         detail_insurance = ", ".join(i.detail_title for i in self.detail_insurance.all())
+        insurance_name = self.insurance.insurance_name if self.insurance else "None"
         return "First Name: {0} | Last Name: {1} | Age: {2} | Address: {3} | Insurance: {4} | Detail Insurance: {5}".format(
-            self.first_name, self.last_name, self.age, self.address, self.insurance.insurance_name, detail_insurance
+            self.first_name, self.last_name, self.age, self.address, insurance_name, detail_insurance
         )
 
     class Meta:
@@ -41,18 +42,21 @@ class InsuredPerson(models.Model):
 	
 class UserManager(BaseUserManager):
     # Create a user
-    def create_user(self, email, password):
-        if email and password:
-            user = self.model(email=self.normalize_email(email))
-            user.set_password(password)
-            user.save()
+    def create_user(self, email, password=None):
+        if not email:
+            raise ValueError("Users must have an email address")
+        if not password:
+            raise ValueError("Users must have a password")
+        user = self.model(email=self.normalize_email(email))
+        user.set_password(password)
+        user.save(using=self._db)
         return user
 
     # Create an admin
-    def create_superuser(self, email, password):
+    def create_superuser(self, email, password=None):
         user = self.create_user(email, password)
         user.is_admin = True
-        user.save()
+        user.save(using=self._db)
         return user
 		
 class User(AbstractBaseUser):
