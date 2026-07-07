@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("insurance_database/", include("insurance_database.urls")),  # Updated app name
+    path("", include("insurance_database.urls")),  # Mounted at root so "/" resolves
 ]
