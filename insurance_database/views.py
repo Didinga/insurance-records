@@ -101,7 +101,8 @@ class EditInsuredPerson(LoginRequiredMixin, generic.edit.UpdateView):
             insured_person.insurance = insurance
             insured_person.detail_insurance.set(detail_insurance)
             insured_person.save()
-        return redirect("insured_person_detail", pk=insured_person.id)
+            return redirect("insured_person_detail", pk=insured_person.id)
+        return render(request, self.template_name, {"form": form})
 
 class UserViewRegister(generic.edit.CreateView):
     form_class = UserForm
